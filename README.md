@@ -1,2 +1,2 @@
 # alg
-practice & homework
+algorithm practice & homework
