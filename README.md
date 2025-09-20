@@ -1,2 +1,2 @@
 # alg
-alg course homework
+practice & homework
