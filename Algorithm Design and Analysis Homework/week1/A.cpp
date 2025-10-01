@@ -14,8 +14,9 @@ int T=1;
 
 int main(){
 	ios_base::sync_with_stdio(false);cout.tie(0);cin.tie(0);
-	// cin>>T;
+    // cin>>T;
 	while(T--){
+        //对于n=101010B，满足2^k<=n条件最大的2^k为100000B，注意到n与2^k位数相同，故答案为n的位数
         ll n;
         cin>>n;
         int cnt=0;
