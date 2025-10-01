@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 110;
-
+//题解：x>=A[i]，故x的下界为max(a[1],...,a[n])，同理x的上界为min(b[1],...,b[n])，注意上界小于下界的情况
 int T=1;
 int n;
 int a[MAX_N],b[MAX_N];
