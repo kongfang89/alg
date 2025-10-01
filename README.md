@@ -1,10 +1,12 @@
 # alg
 
-algorithm practice: 
+### algorithm practice: 
 
-Codeforces Atcoder
+1.Codeforces
 
-algorithm homework:
+2.Atcoder
+
+### algorithm homework:
 
 SZTU 算法设计与分析
 
