@@ -9,7 +9,11 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 110;
-
+/*题解：
+注意到本题没有除法，可以先算乘法再算加减法，减法可以转化为加法
+从前往后遍历，每遇到一个乘法，以当前为起点往后遍历连续的乘法，起点乘以后面每个数，同时把后面的数改为0
+最后对数组求和就是答案
+*/
 int T=1;
 int n;
 ll a[MAX_N],ans=0;
@@ -40,8 +44,6 @@ int main(){
 				i=j-1;
 			}
 		}
-		// for(int i=0;i<n;i++)
-        //     cout<<a[i]<<' ';
         for(int i=0;i<n;i++)
             ans+=a[i];
         cout<<ans<<endl;
