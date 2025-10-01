@@ -9,14 +9,13 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1;
-
+//题解：对于n=101010B，满足2^k<=n条件最大的2^k为100000B，注意到n与2^k位数相同，故答案为n的位数
 int T=1;
 
 int main(){
 	ios_base::sync_with_stdio(false);cout.tie(0);cin.tie(0);
     // cin>>T;
-	while(T--){
-        //对于n=101010B，满足2^k<=n条件最大的2^k为100000B，注意到n与2^k位数相同，故答案为n的位数
+	while(T--){        
         ll n;
         cin>>n;
         int cnt=0;
