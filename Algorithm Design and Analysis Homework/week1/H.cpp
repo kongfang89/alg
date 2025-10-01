@@ -9,8 +9,8 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1e4+10;
-
-//输入
+//题解：看注释
+int T=1;
 int n,q;
 int a[MAX_N];
 //dp[i]表示按长度i分组的答案
@@ -20,6 +20,7 @@ int a[MAX_N];
 int dp[MAX_N],last[MAX_N],d[MAX_N],s[MAX_N];
 
 int main(){
+    // cin>>T;
 	while(scanf("%d %d",&n,&q)!=EOF){
         //初始化
         memset(last,-1,sizeof(last));
@@ -28,12 +29,12 @@ int main(){
 		dp[1]=n;
         for(int i=0;i<n;i++){
             scanf("%d",&a[i]);
-            //统计每个元素与上次出现位置距离的次数，首次出现则距离为i
+            //统计每个元素与上次出现位置距离的次数，首次出现则距离为i+1
             d[i-last[a[i]]]++;
             //更新上次出现位置
             last[a[i]]=i;
         }
-        //s[i]=d[i]+d[i+1]+...+d[n-1]
+        //后缀和 s[i]=d[i]+d[i+1]+...+d[n-1]
         for(int i=0;i<=n;i++)
             s[i]=d[i];
 		for(int i=n-1;i>=1;i--)
