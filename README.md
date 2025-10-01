@@ -1,14 +1,12 @@
-# alg
-
-### algorithm practice: 
+### Algorithm practice: 
 
 1.Codeforces
 
 2.Atcoder
 
-### algorithm homework:
+### Algorithm homework:
 
-SZTU 算法设计与分析
+SZTU-研究生课程-算法设计与分析
 
 1.2025秋-研究生算法-实验01-程序基础与数据结构复习
 
