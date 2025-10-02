@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 110;
-
+//题解：从左到右从上到下编号，则从顶层走到节点i,j的最大和为dp[i][j]=max(dp[i-1][j-1],dp[i-1][j])+a[i][j]
 int T=1;
 int n;
 int a[MAX_N][MAX_N];

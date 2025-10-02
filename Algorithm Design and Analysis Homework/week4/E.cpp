@@ -9,7 +9,12 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 110;
-
+/*题解：
+区间dp问题，dp[l][r]表示使第l个括号到第r个括号是完美匹配的最少添加个数
+枚举l到r之间的每个i，dp[l][r]=min(dp[l][r],dp[l,i]+dp[i+1,r])
+如果第l个括号和第r个括号已经匹配，则dp[l][r]=min(dp[l][r],dp[l+1,r-1])
+*/
+int T=1;
 int n;
 string s;
 int dp[MAX_N][MAX_N];
@@ -30,6 +35,8 @@ int dfs(int l,int r){
 }
 
 int main(){	
+	ios_base::sync_with_stdio(false);cout.tie(0);cin.tie(0);
+	// cin>>T;
 	while(cin>>s){
 		n=s.size();
 		memset(dp,-1,sizeof(dp));

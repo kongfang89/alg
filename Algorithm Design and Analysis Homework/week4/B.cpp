@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1e5+10;
-
+//题解：从前往后取，对于a[i]要么取要么从a[i]重新开始，选和更大的情况
 int T=1;
 int n;
 int a[MAX_N];

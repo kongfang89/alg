@@ -9,11 +9,14 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 310;
-
+/*题解：
+把每个原始立方体看作三个立方体，也就是将输入的三条棱分别作为高视为一个新立方体
+由题目条件可得对于立方体A,B一定不会有A上叠B，B上再叠A的情况，则可根据叠放关系建图，若A能叠B，则连边A->B
+显然建的图是DAG，从每个点出发树上dp，记忆化搜索即可
+*/
 int T=1;
 int n;
-struct node
-{
+struct node{
 	int x,y,z;
 };
 vector<node> v;
