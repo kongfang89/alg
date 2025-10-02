@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1;
-//题解：a^n=a^(n/2)*a^(n/2)*(n%2==1?a:1)
+//题解：a^n=a^(n/2)*a^(n/2)*(n%2==1?a:1)，快速幂
 int T=1;
 int a,b,p;
 

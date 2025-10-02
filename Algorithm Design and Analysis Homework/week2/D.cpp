@@ -5,7 +5,12 @@ typedef long long ll;
 typedef unsigned long long ull;
 const int MAX_N=5;
 const int MOD=1e9+7;
-
+/*题解：
+设矩阵A=(1 1) f[i]表示斐波那契数列的第i个数
+        (1 0)
+注意到(f[n] f[n-1])*A=(f[n]+f[n-1] f[n])=(f[n+1] f[n])
+则(f[2] f[1])*(A^n-2)=(f[n] f[n-1])
+*/
 struct Mat{
 	ll c[MAX_N][MAX_N];
 }I,A,F;
