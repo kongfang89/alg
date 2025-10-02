@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 100003;
 //const int mod = 998244353;
 const int MAX_N = 1e6+10;
-//题解：枚举每一级台阶，对于第i级台阶，ans[i]=ans[i-k]+ans[i-k+1]+...+ans[i-1]
+//题解：枚举每一级台阶，对于第i级台阶，到达该台阶的路径数ans[i]=ans[i-k]+ans[i-k+1]+...+ans[i-1]
 int T=1;
 int n,k;
 int ans[MAX_N];
