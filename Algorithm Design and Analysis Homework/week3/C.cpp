@@ -1,8 +1,16 @@
 #include <bits/stdc++.h>
-#define INF 1<<31-1
+#define INF INT_MAX
+#define LINF LLONG_MAX 
+#define YES cout<<"YES"<<endl
+#define NO cout<<"NO"<<endl
 using namespace std;
+typedef long long ll;
+typedef unsigned long long ull;
+const int mod = 1e9+7;
+//const int mod = 998244353;
+const int MAX_N = 200010;
 
-const int MAX_N=200010;
+int T=1;
 //点的结构体 
 struct point{
 	double x,y;
@@ -73,6 +81,8 @@ int cmp(pair<double,pair<int,int>> a,pair<double,pair<int,int>> b){
 }
 
 int main(){
+	ios_base::sync_with_stdio(false);cout.tie(0);cin.tie(0);
+	// cin>>T;
     while(cin>>n){
         for(int i=1;i<=n;i++){
             cin>>p[i].x>>p[i].y;

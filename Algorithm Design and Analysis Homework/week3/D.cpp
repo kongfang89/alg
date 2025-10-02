@@ -1,14 +1,22 @@
 #include <bits/stdc++.h>
 #define INF INT_MAX
 #define LINF LLONG_MAX 
+#define YES cout<<"YES"<<endl
+#define NO cout<<"NO"<<endl
 using namespace std;
 typedef long long ll;
 typedef unsigned long long ull;
+const int mod = 1e9+7;
+//const int mod = 998244353;
 //复数 
 typedef complex<double> cp;
+double pi=acos(-1.0);
 const int MAX_N=1000010; 
 const int MAX_M=4000010;
-double pi=acos(-1.0);
+/*题解：
+https://github.com/kongfang89/alg/blob/master/Algorithm_Kongfang89/%E7%AE%97%E6%B3%95%20%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2FFT.md
+如果latex没有渲染，可以下载到本地浏览
+*/
 //输入数 
 char s1[MAX_N],s2[MAX_N];
 //数位长度 
@@ -55,9 +63,7 @@ void FFT(cp *a,int f){
 }
 
 int main(){
-	ios_base::sync_with_stdio(false);
-	cout.tie(0);
-	cin.tie(0);
+	ios_base::sync_with_stdio(false);cout.tie(0);cin.tie(0);
 	//输入 
 	cin>>s1>>s2;
 	//获取字符串s1,s2的长度-1，也即最后一个数的下标 
