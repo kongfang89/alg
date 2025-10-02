@@ -20,6 +20,7 @@ int a[MAX_N];
 int dp[MAX_N],last[MAX_N],d[MAX_N],s[MAX_N];
 
 int main(){
+    // ios_base::sync_with_stdio(false);cout.tie(0);cin.tie(0);
     // cin>>T;
 	while(scanf("%d %d",&n,&q)!=EOF){
         //初始化
