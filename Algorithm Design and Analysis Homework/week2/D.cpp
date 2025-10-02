@@ -1,16 +1,21 @@
 #include <bits/stdc++.h>
-#define INF 99999999
+#define INF INT_MAX
+#define LINF LLONG_MAX 
+#define YES cout<<"YES"<<endl
+#define NO cout<<"NO"<<endl
 using namespace std;
 typedef long long ll;
 typedef unsigned long long ull;
-const int MAX_N=5;
-const int MOD=1e9+7;
+const int mod = 1e9+7;
+//const int mod = 998244353;
+const int MAX_N = 1;
 /*题解：
 设矩阵A=(1 1) f[i]表示斐波那契数列的第i个数
         (1 0)
 注意到(f[n] f[n-1])*A=(f[n]+f[n-1] f[n])=(f[n+1] f[n])
 则(f[2] f[1])*(A^n-2)=(f[n] f[n-1])
 */
+int T=1;
 struct Mat{
 	ll c[MAX_N][MAX_N];
 }I,A,F;
@@ -37,28 +42,26 @@ Mat operator*(const Mat &x,const Mat &y){
 	for(int i=1;i<=2;i++)
 		for(int j=1;j<=2;j++)
 			for(int k=1;k<=2;k++){
-				z.c[i][j]+=(x.c[i][k]%MOD)*(y.c[k][j]%MOD)%MOD;
-				z.c[i][j]%=MOD;
+				z.c[i][j]+=(x.c[i][k]%mod)*(y.c[k][j]%mod)%mod;
+				z.c[i][j]%=mod;
 			}
 	return z;
 }
 
 Mat mat_ksm(Mat A,ll n){
-    Mat II=I;
+    Mat res=I;
     while(n){
         if(n&1)
-            II=II*A;
+            res=res*A;
         A=A*A;
         n>>=1;
     }
-    return II;
+    return res;
 }
 
 int main(){
-	ios_base::sync_with_stdio(false);
-	cout.tie(0);
-	cin.tie(0);
-	//freopen("1.out","w",stdout);
+	ios_base::sync_with_stdio(false);cout.tie(0);cin.tie(0);
+	// cin>>T;
 	init();
     while(cin>>n){
     	if(n<=2){
@@ -71,10 +74,3 @@ int main(){
     }
 	return 0;
 }
-
-/*
-样例
-5
-输出
-5
-*/
