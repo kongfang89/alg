@@ -14,6 +14,7 @@ const int MAX_N = 1;
         (1 0)
 注意到(f[n] f[n-1])*A=(f[n]+f[n-1] f[n])=(f[n+1] f[n])
 则(f[2] f[1])*(A^n-2)=(f[n] f[n-1])
+其中A^n-2用矩阵快速幂实现即可
 */
 int T=1;
 struct Mat{
