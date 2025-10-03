@@ -84,9 +84,6 @@ int main(){
 		vector<int> ans=binary_mul(a,b);
 		while(!ans.empty()&&ans.back()==0)
 			ans.pop_back();
-		for(auto x:ans)
-			cout<<x<<' ';
-		cout<<'\n';
 		//由于前面的加减法都是朴素加减，没有考虑进位的情况，输出前需要处理一下
 		//借位不需要考虑，不会出现负数
 		int flag=0;
