@@ -1,5 +1,5 @@
 dir:
-date round# round
+date type round
 
 cpp file:
 single question#: AC in contest
