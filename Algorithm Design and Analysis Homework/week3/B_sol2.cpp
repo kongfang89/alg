@@ -11,9 +11,10 @@ const int mod = 1e9+7;
 //复数 
 typedef complex<double> cp;
 double pi=acos(-1.0);
-const int MAX_N=1000010; 
-const int MAX_M=4000010;
+const int MAX_N=40010; 
+const int MAX_M=160010;
 /*题解：
+本题使用FFT也可以通过，只需要把D题代码的ans视作二进制处理即可
 https://github.com/kongfang89/alg/blob/master/Algorithm_Kongfang89/%E7%AE%97%E6%B3%95%20%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2FFT.md
 如果latex没有渲染，可以下载到本地浏览
 */
@@ -24,7 +25,7 @@ int lena,lenb;
 //多项式 
 cp a[MAX_M],b[MAX_M];
 //FFT要计算的单位根数，log_{2}(limit) 
-int limit=1,len;
+int limit,len;
 //每个单位根结束位置，输出答案 
 int rev[MAX_M],ans[MAX_M];
 //a是要FFT的多项式，f是(1/-1)->(FFT/IFFT)
@@ -65,49 +66,54 @@ void FFT(cp *a,int f){
 int main(){
 	ios_base::sync_with_stdio(false);cout.tie(0);cin.tie(0);
 	//输入 
-	cin>>s1>>s2;
-	//获取字符串s1,s2的长度-1，也即最后一个数的下标 
-	lena=strlen(s1)-1;
-	lenb=strlen(s2)-1;
-	for(int i=lena;i>=0;i--)s1[i+4]=s1[i];
-    s1[0]=s1[1]=s1[2]=s1[3]='0';lena+=4;
-    for(int i=lenb;i>=0;i--)s2[i+4]=s2[i];
-    s2[0]=s2[1]=s2[2]=s2[3]='0';lenb+=4;
-	//将两个数的倒序按位存在复数的实部中：比如123456789这个数，存在字符串中就是98765432100000......（下标由0到MAX_N-1） 
-	for(int i=0;i<=lena;i++)
-		a[i]=(double)(s1[lena-i]-'0');
-	for(int i=0;i<=lenb;i++)
-		b[i]=(double)(s2[lenb-i]-'0');
-	//计算limit,len
-	//limit:大于等于lena+lenb的第一个2的m次幂，这是为了便于FFT递归分治的实现 
-	//len:log_{2}(limit)
-	while(limit<lena+lenb){
-		limit<<=1;
-		len++;
-	}
-	//预处理出所有w_{n}{i}最终的位置 
-	for(int i=0;i<limit;i++)
-		rev[i]=(rev[i>>1]>>1)|((i&1)<<(len-1));
-	//FFT:将a,b两个多项式的系数表示转为点值表示 
-	FFT(a,1);
-	FFT(b,1);
-	//点值表示的多项式乘法：y值相乘 
-	for(int i=0;i<=limit;i++)
-		a[i]=a[i]*b[i];
-	//IFFT:将多项式相乘结果的点值表示转为系数表示 
-	FFT(a,-1);
-	//将每一位进位后存到ans数组 
-	for(int i=0;i<=limit;i++){
-		ans[i]+=(int)(a[i].real()+0.5);
-		ans[i+1]+=ans[i]/10;
-		ans[i]%=10;
-	}
-	//数前面位为0的部分不要 
-	while(limit&&!ans[limit])
-		limit--;
-	//输出答案 
-	for(int i=limit;i>=0;i--)
-		cout<<ans[i];
-	cout<<'\n';
+	while(cin>>s1>>s2){
+        //获取字符串s1,s2的长度-1，也即最后一个数的下标，前面补4个零
+        lena=strlen(s1)-1;
+        lenb=strlen(s2)-1;
+        for(int i=lena;i>=0;i--)s1[i+4]=s1[i];
+        s1[0]=s1[1]=s1[2]=s1[3]='0';lena+=4;
+        for(int i=lenb;i>=0;i--)s2[i+4]=s2[i];
+        s2[0]=s2[1]=s2[2]=s2[3]='0';lenb+=4;
+        limit=1;
+        len=0;
+        for(int i=0;i<MAX_M;i++)
+            rev[i]=ans[i]=0,a[i]=b[i]=0;
+        //将两个数的倒序按位存在复数的实部中：比如123456789这个数，存在字符串中就是98765432100000......（下标由0到MAX_N-1） 
+        for(int i=0;i<=lena;i++)
+            a[i]=(double)(s1[lena-i]-'0');
+        for(int i=0;i<=lenb;i++)
+            b[i]=(double)(s2[lenb-i]-'0');
+        //计算limit,len
+        //limit:大于等于lena+lenb的第一个2的m次幂，这是为了便于FFT递归分治的实现 
+        //len:log_{2}(limit)
+        while(limit<lena+lenb){
+            limit<<=1;
+            len++;
+        }
+        //预处理出所有w_{n}{i}最终的位置 
+        for(int i=0;i<limit;i++)
+            rev[i]=(rev[i>>1]>>1)|((i&1)<<(len-1));
+        //FFT:将a,b两个多项式的系数表示转为点值表示 
+        FFT(a,1);
+        FFT(b,1);
+        //点值表示的多项式乘法：y值相乘 
+        for(int i=0;i<=limit;i++)
+            a[i]=a[i]*b[i];
+        //IFFT:将多项式相乘结果的点值表示转为系数表示 
+        FFT(a,-1);
+        //将每一位进位后存到ans数组 
+        for(int i=0;i<=limit;i++){
+            ans[i]+=(int)(a[i].real()+0.5);
+            ans[i+1]+=ans[i]/2;
+            ans[i]%=2;
+        }
+        //数前面位为0的部分不要 
+        while(limit&&!ans[limit])
+            limit--;
+        //输出答案 
+        for(int i=limit;i>=0;i--)
+            cout<<ans[i];
+        cout<<'\n';
+    }	
 	return 0;
 }
