@@ -187,14 +187,18 @@ $3th:w_{n}^{0},w_{n}^{4},w_{n}^{2},w_{n}^{6},w_{n}^{1},w_{n}^{5},w_{n}^{3},w_{n}
 #include <bits/stdc++.h>
 #define INF INT_MAX
 #define LINF LLONG_MAX 
+#define YES cout<<"YES"<<endl
+#define NO cout<<"NO"<<endl
 using namespace std;
 typedef long long ll;
 typedef unsigned long long ull;
+const int mod = 1e9+7;
+//const int mod = 998244353;
 //复数 
 typedef complex<double> cp;
+double pi=acos(-1.0);
 const int MAX_N=1000010; 
 const int MAX_M=4000010;
-double pi=acos(-1.0);
 //输入数 
 char s1[MAX_N],s2[MAX_N];
 //数位长度 
@@ -241,21 +245,17 @@ void FFT(cp *a,int f){
 }
 
 int main(){
-	freopen("1.in","r",stdin);
-	ios_base::sync_with_stdio(false);
-	cout.tie(0);
-	cin.tie(0);
-	//freopen("1.out","w",stdout);
+	ios_base::sync_with_stdio(false);cout.tie(0);cin.tie(0);
 	//输入 
 	cin>>s1>>s2;
-	//获取字符串s1,s2的长度-1，也即最后一个数的下标 
-	lena=strlen(s1)-1;
-	lenb=strlen(s2)-1;
+	//获取字符串s1,s2的长度
+	lena=strlen(s1);
+	lenb=strlen(s2);
 	//将两个数的倒序按位存在复数的实部中：比如123456789这个数，存在字符串中就是98765432100000......（下标由0到MAX_N-1） 
-	for(int i=0;i<=lena;i++)
-		a[i]=(double)(s1[lena-i]-'0');
-	for(int i=0;i<=lenb;i++)
-		b[i]=(double)(s2[lenb-i]-'0');
+	for(int i=0;i<lena;i++)
+		a[i]=(double)(s1[lena-i-1]-'0');
+	for(int i=0;i<lenb;i++)
+		b[i]=(double)(s2[lenb-i-1]-'0');
 	//计算limit,len
 	//limit:大于等于lena+lenb的第一个2的m次幂，这是为了便于FFT递归分治的实现 
 	//len:log_{2}(limit)
@@ -289,13 +289,5 @@ int main(){
 	cout<<'\n';
 	return 0;
 }
-
-/*
-样例
-114514 
-1919810
-输出
-219845122340
-*/
 ```
 
