@@ -6,7 +6,7 @@ Prufer数列是无根树的一种数列，其与无根树有着一一对应的�
 
 由于Prufer数列与无根树是一一对应的，我们可以考虑两者的互相转换。
 
-![alg10-pic1](img\alg10-pic1.png)
+![alg10-pic1](img/alg10-pic1.png)
 
 以上图无根树为例
 
