@@ -68,21 +68,17 @@ int main(){
 	//输入 
 	while(cin>>s1>>s2){
         //获取字符串s1,s2的长度-1，也即最后一个数的下标，前面补4个零
-        lena=strlen(s1)-1;
-        lenb=strlen(s2)-1;
-        for(int i=lena;i>=0;i--)s1[i+4]=s1[i];
-        s1[0]=s1[1]=s1[2]=s1[3]='0';lena+=4;
-        for(int i=lenb;i>=0;i--)s2[i+4]=s2[i];
-        s2[0]=s2[1]=s2[2]=s2[3]='0';lenb+=4;
+        lena=strlen(s1);
+        lenb=strlen(s2);
         limit=1;
         len=0;
         for(int i=0;i<MAX_M;i++)
             rev[i]=ans[i]=0,a[i]=b[i]=0;
         //将两个数的倒序按位存在复数的实部中：比如123456789这个数，存在字符串中就是98765432100000......（下标由0到MAX_N-1） 
-        for(int i=0;i<=lena;i++)
-            a[i]=(double)(s1[lena-i]-'0');
-        for(int i=0;i<=lenb;i++)
-            b[i]=(double)(s2[lenb-i]-'0');
+        for(int i=0;i<lena;i++)
+            a[i]=(double)(s1[lena-i-1]-'0');
+        for(int i=0;i<lenb;i++)
+            b[i]=(double)(s2[lenb-i-1]-'0');
         //计算limit,len
         //limit:大于等于lena+lenb的第一个2的m次幂，这是为了便于FFT递归分治的实现 
         //len:log_{2}(limit)
