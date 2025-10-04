@@ -34,13 +34,13 @@ void solve(vector<pair<int,int>> Q,vector<int> a,int k){
             v+=Q[i+1].second;
             i++;
         }
-        if(r<(1<<k)){
-            if(!L.empty())
-                QL.push_back({r,v});
-            else{
+        if(r<=(1<<k)){
+            if(L.empty()){
                 ans+=1ll*(1<<k)*r*v;
                 QR.push_back({r,v});
             }
+            else
+                QL.push_back({r,v});
         }
         else{
             if(L.empty()){
