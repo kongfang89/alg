@@ -106,13 +106,13 @@ int main(){
 				else{
 					cout<<"Yes\n";
 					update(1,x,1,n,y);
-					update(1,y,1,n,x);
+                    update(1,y,1,n,x);
 				}
 			}
 			else{
 				cout<<"Yes\n";
 				update(1,x,1,n,y);
-				update(1,y,1,n,x);
+                update(1,y,1,n,x);
 			}
 		}
 	}
