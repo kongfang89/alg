@@ -25,7 +25,7 @@ int check(int x,int y){
 		if(s[nx][ny]=='#')
             res++;
 	}
-    return res%2==0;
+    return (res==4||res==2);
 }
 
 int main(){
