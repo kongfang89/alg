@@ -26,6 +26,10 @@ int main(){
 			if(!l[i])
 				second=i;
 		}
+		if(first==0&&second==0){
+            cout<<0<<'\n';
+            break;
+        }
         int ans=second-first+1;
         if(r<first)
             ans+=(first-r-1)*2;
