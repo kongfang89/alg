@@ -11,10 +11,10 @@ const int mod = 1e9+7;
 const int MAX_N = 20;
 
 int T=1;
-int a[MAX_N];
+ll a[MAX_N];
 
-int rev(int x){
-	int res=0;
+ll rev(ll x){
+	ll res=0;
 	while(x){
 		res*=10;
 		res+=x%10;
