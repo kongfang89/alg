@@ -79,19 +79,16 @@ int main(){
             ct+=dy[s[i]];
             ra+=dx[t[j]];
             ca+=dy[t[j]];
-            if(dr==dc&&(end-now)>=dr){
-                if(dr>abs(rt-ra)&&dc>abs(ct-ca))
-                    ans++;
-            }
+            if(dr==dc&&(end-now)>=dr&&dr>abs(rt-ra)&&dc>abs(ct-ca))
+                ans++;
             rt+=(end-now-1)*dx[s[i]];
             ct+=(end-now-1)*dy[s[i]];
             ra+=(end-now-1)*dx[t[j]];
             ca+=(end-now-1)*dy[t[j]];
         }
         else if(rt==ra&&ct==ca){
-            if(s[i]==t[j]){
+            if(s[i]==t[j])
                 ans+=(end-now);
-            }
             rt+=(end-now)*dx[s[i]];
             ct+=(end-now)*dy[s[i]];
             ra+=(end-now)*dx[t[j]];
@@ -103,7 +100,7 @@ int main(){
             ct+=dy[s[i]];
             ra+=dx[t[j]];
             ca+=dy[t[j]];
-            if(d%2==0&&(end-now)>=d/2&&d>max(abs(rt-ra),abs(ct-ca))&&min(abs(rt-ra),abs(ct-ca))==0)
+            if(d%2==0&&(end-now)>=d/2&&d==max(abs(rt-ra),abs(ct-ca))+2)
                 ans++;
             rt+=(end-now-1)*dx[s[i]];
             ct+=(end-now-1)*dy[s[i]];
