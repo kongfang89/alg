@@ -1,223 +1,183 @@
 #include <bits/stdc++.h>
+#define INF INT_MAX
+#define LINF LLONG_MAX 
+#define YES cout<<"YES"<<endl
+#define NO cout<<"NO"<<endl
 using namespace std;
 typedef long long ll;
+typedef unsigned long long ull;
 const int mod = 1e9+7;
+//const int mod = 998244353;
+const int MAX_N = 60;
 
-int n, m;
-int L[55], R[55];
+int T=1;
+int n,m;
+int l[MAX_N],r[MAX_N];
+//cnt[i][j]: i个位置，提供j个因子3的方案数
+ll cnt[MAX_N][MAX_N<<1];
+ll single[MAX_N];
 
-// ways[i][j] = i个位置，提供j个因子3的方案数
-ll ways[55][105];
-
-// single[len] = 长度为len的独立区间的方案数
-ll single[55];
-
-void precompute_ways() {
-    memset(ways, 0, sizeof(ways));
-    ways[0][0] = 1;
-    
-    for (int i = 0; i < 50; i++) {
-        for (int j = 0; j <= 100; j++) {
-            if (ways[i][j] == 0) continue;
-            ways[i+1][j] = (ways[i+1][j] + ways[i][j] * 6) % mod;
-            if (j+1 <= 100)
-                ways[i+1][j+1] = (ways[i+1][j+1] + ways[i][j] * 2) % mod;
-            if (j+2 <= 100)
-                ways[i+1][j+2] = (ways[i+1][j+2] + ways[i][j] * 2) % mod;
-        }
-    }
-    
-    // 预计算独立区间的方案数
-    // 长度为len的区间，乘积mod 9 = 0，即至少2个因子3
-    memset(single, 0, sizeof(single));
-    for (int len = 1; len <= 50; len++) {
-        for (int cnt3 = 2; cnt3 <= 100; cnt3++) {
-            single[len] = (single[len] + ways[len][cnt3]) % mod;
-        }
-    }
-}
-
-struct Group {
+struct Group{
     int cnt;
     vector<int> intervals;
 };
 
 vector<Group> groups;
-map<vector<int>, ll> memo;
+map<vector<int>,ll> dp;
 
-ll solve(int g, vector<int> state) {
-    if (g == groups.size()) {
-        for (int i = 0; i < m; i++) {
-            if (state[i] < 2) return 0;
+void init(){
+    cnt[0][0]=1;
+    for(int i=0;i<50;i++){
+        for(int j=0;j<=100;j++){
+            if(cnt[i][j]==0)
+                continue;
+            cnt[i+1][j]=(cnt[i+1][j]+cnt[i][j]*6)%mod;
+            if(j+1<=100)
+                cnt[i+1][j+1]=(cnt[i+1][j+1]+cnt[i][j]*2)%mod;
+            if(j+2<=100)
+                cnt[i+1][j+2]=(cnt[i+1][j+2]+cnt[i][j]*2)%mod;
         }
+    }
+    for(int len=1;len<=50;len++)
+        for(int c3=2;c3<=100;c3++)
+            single[len]=(single[len]+cnt[len][c3])%mod;
+}
+
+ll solve(int g,vector<int> state){
+    if(g==groups.size()){
+        for(int i=0;i<m;i++)
+            if(state[i]<2)
+                return 0;
         return 1;
     }
-    
-    auto key = state;
-    key.insert(key.begin(), g);
-    if (memo.count(key)) {
-        return memo[key];
+    auto key=state;
+    key.insert(key.begin(),g);
+    if(dp.count(key))
+        return dp[key];
+    Group &cur=groups[g];
+    ll ans=0;
+    if(cur.intervals.empty()){
+        ans=1;
+        for(int i=0;i<cur.cnt;i++)
+            ans=ans*10%mod;
+        dp[key]=ans*solve(g+1,state)%mod;
+        return dp[key];
     }
-    
-    ll ans = 0;
-    Group &cur = groups[g];
-    
-    // 关键优化：如果这个组不属于任何区间（独立位置）
-    if (cur.intervals.empty()) {
-        // 这些位置可以随意填，10^cnt种
-        ans = 1;
-        for (int i = 0; i < cur.cnt; i++) {
-            ans = ans * 10 % mod;
-        }
-        return memo[key] = ans * solve(g + 1, state) % mod;
-    }
-    
-    // 关键优化：计算当前组影响的区间中，最多需要多少因子3
-    int max_deficit = 0;
-    bool all_satisfied = true;
-    for (int id : cur.intervals) {
-        if (state[id] < 2) {
-            all_satisfied = false;
-            max_deficit = max(max_deficit, 2 - state[id]);
+    int max_deficit=0;
+    bool all_satisfied=true;
+    for(int id:cur.intervals){
+        if(state[id]<2){
+            all_satisfied=false;
+            max_deficit=max(max_deficit,2-state[id]);
         }
     }
-    
-    // 只枚举到必要的上界
-    int upper = min(100, 2 * cur.cnt);
-    if (all_satisfied) {
-        // 所有覆盖的区间都已满足，仍需完整枚举
-        // 因为后续组可能需要这些位置
-        upper = min(100, 2 * cur.cnt);
+    int upper=min(100,2*cur.cnt);
+    if(all_satisfied){
+        upper=min(100,2*cur.cnt);
     }
-    
-    for (int total = 0; total <= upper; total++) {
-        vector<int> new_state = state;
-        for (int id : cur.intervals) {
-            new_state[id] += total;
-            if (new_state[id] > 2) new_state[id] = 2;
+    for(int total=0;total<=upper;total++){
+        vector<int> new_state=state;
+        for(int id:cur.intervals){
+            new_state[id]+=total;
+            if(new_state[id]>2)
+                new_state[id]=2;
         }
-        
-        ll cnt = ways[cur.cnt][total];
-        if (cnt > 0) {
-            ans = (ans + cnt * solve(g + 1, new_state)) % mod;
+        ll c=cnt[cur.cnt][total];
+        if(c>0){
+            ans=(ans+c*solve(g+1,new_state))%mod;
         }
     }
-    
-    memo[key] = ans;
+    dp[key]=ans;
     return ans;
 }
 
 int main(){
-    ios_base::sync_with_stdio(false);
-    cout.tie(0);
-    cin.tie(0);
-    
-    precompute_ways();
-    
-    while(cin >> n >> m) {
-        memo.clear();
+	ios_base::sync_with_stdio(false);cout.tie(0);cin.tie(0);
+	// cin>>T;
+    init();
+	while(cin>>n>>m){
+        dp.clear();
         groups.clear();
-        
-        vector<pair<int,int>> raw_intervals;
-        for(int i = 0; i < m; i++) {
-            int l, r;
-            cin >> l >> r;
-            raw_intervals.push_back({l, r});
+		vector<pair<int,int>> input_intervals;
+        for(int i=0;i<m;i++){
+            int L,R;
+            cin>>L>>R;
+            input_intervals.push_back({L,R});
         }
-        
-        // 关键优化：删除冗余区间
-        // 如果区间i包含区间j（i更大），则删除区间i
-        vector<bool> is_redundant(raw_intervals.size(), false);
-        for (int i = 0; i < (int)raw_intervals.size(); i++) {
-            for (int j = 0; j < (int)raw_intervals.size(); j++) {
-                if (i != j && !is_redundant[i]) {
-                    int li = raw_intervals[i].first, ri = raw_intervals[i].second;
-                    int lj = raw_intervals[j].first, rj = raw_intervals[j].second;
-                    // i包含j（i是大区间），标记i为冗余
-                    if (li <= lj && rj <= ri && (li < lj || rj < ri)) {
-                        is_redundant[i] = true;
-                        break;
-                    }
+        vector<bool> is_big(m,false);
+        for(int i=0;i<m;i++){
+            for(int j=0;j<m;j++){
+                if(i==j)
+                    continue;
+                int li=input_intervals[i].first,ri=input_intervals[i].second;
+                int lj=input_intervals[j].first,rj=input_intervals[j].second;
+                if(li<=lj&&rj<=ri&&(li<lj||rj<ri)){
+                    is_big[i]=true;
+                    break;
+                }
+                if(li==lj&&ri==rj&&i>j){
+                    is_big[i]=true;
+                    break;
                 }
             }
         }
+        vector<pair<int,int>> small_intervals;
+        for(int i=0;i<m;i++)
+            if(!is_big[i])
+                small_intervals.push_back(input_intervals[i]);
         
-        // 只保留非冗余区间
-        vector<pair<int,int>> intervals;
-        for (int i = 0; i < (int)raw_intervals.size(); i++) {
-            if (!is_redundant[i]) {
-                intervals.push_back(raw_intervals[i]);
-            }
-        }
-        
-        // 新优化：找出独立区间（不与任何其他区间相交）
-        vector<bool> is_isolated(intervals.size(), true);
-        for (int i = 0; i < (int)intervals.size(); i++) {
-            for (int j = 0; j < (int)intervals.size(); j++) {
-                if (i != j) {
-                    int li = intervals[i].first, ri = intervals[i].second;
-                    int lj = intervals[j].first, rj = intervals[j].second;
-                    // 判断是否相交
-                    if (!(ri < lj || rj < li)) {
-                        is_isolated[i] = false;
+        m=small_intervals.size();
+        vector<bool> is_isolated(m,true);
+        for(int i=0;i<m;i++)
+            for(int j=0;j<m;j++)
+                if(i!=j){
+                    int li=small_intervals[i].first,ri=small_intervals[i].second;
+                    int lj=small_intervals[j].first,rj=small_intervals[j].second;
+                    if(!(ri<lj||rj<li)){
+                        is_isolated[i]=false;
                         break;
                     }
                 }
-            }
-        }
-        
-        // 计算独立区间的贡献
-        ll isolated_contribution = 1;
+        ll ans=1;
         vector<pair<int,int>> non_isolated;
-        set<int> isolated_positions; // 记录独立区间覆盖的位置
-        
-        for (int i = 0; i < (int)intervals.size(); i++) {
-            if (is_isolated[i]) {
-                int len = intervals[i].second - intervals[i].first + 1;
-                isolated_contribution = isolated_contribution * single[len] % mod;
-                // 记录这些位置
-                for (int pos = intervals[i].first; pos <= intervals[i].second; pos++) {
+        set<int> isolated_positions;
+        for(int i=0;i<m;i++){
+            if(is_isolated[i]){
+                int len=small_intervals[i].second-small_intervals[i].first+1;
+                ans=ans*single[len]%mod;
+                for(int pos=small_intervals[i].first;pos<=small_intervals[i].second;pos++)
                     isolated_positions.insert(pos);
-                }
-            } else {
-                non_isolated.push_back(intervals[i]);
+            }
+            else{
+                non_isolated.push_back(small_intervals[i]);
             }
         }
-        
-        // 将筛选后的区间复制到L[], R[]
-        m = non_isolated.size();
-        for (int i = 0; i < m; i++) {
-            L[i] = non_isolated[i].first;
-            R[i] = non_isolated[i].second;
+        m=non_isolated.size();
+        for(int i=0;i<m;i++){
+            l[i]=non_isolated[i].first;
+            r[i]=non_isolated[i].second;
         }
-        
-        // 按覆盖情况分组（只考虑非独立区间覆盖的位置）
-        map<set<int>, int> group_map;
-        for (int pos = 1; pos <= n; pos++) {
-            // 跳过独立区间覆盖的位置
-            if (isolated_positions.count(pos)) continue;
-            
-            set<int> covering;
-            for (int i = 0; i < m; i++) {
-                if (L[i] <= pos && pos <= R[i]) {
-                    covering.insert(i);
-                }
-            }
-            group_map[covering]++;
+
+        map<set<int>,int> group_map;
+        for(int pos=1;pos<=n;pos++){
+            if(isolated_positions.count(pos))
+                continue;
+            set<int> cover_set;
+            for(int i=0;i<m;i++)
+                if(l[i]<=pos&&pos<=r[i])
+                    cover_set.insert(i);
+            group_map[cover_set]++;
         }
-        
-        for (auto &p : group_map) {
+        for(auto &p:group_map){
             Group g;
-            g.intervals = vector<int>(p.first.begin(), p.first.end());
-            g.cnt = p.second;
+            g.intervals=vector<int>(p.first.begin(),p.first.end());
+            g.cnt=p.second;
             groups.push_back(g);
         }
-        
-        vector<int> init_state(m, 0);
-        ll result = solve(0, init_state);
-        result = result * isolated_contribution % mod;
-        cout << result << endl;
-    }
-    
-    return 0;
+        vector<int> init_state(m,0);
+        ll res=solve(0,init_state);
+        ans=ans*res%mod;
+        cout<<ans<<endl;
+	}   
+	return 0;
 }
