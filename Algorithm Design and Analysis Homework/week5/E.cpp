@@ -54,13 +54,8 @@ ll solve(int g,vector<int> state){
     key.insert(key.begin(),g);
     if(dp.count(key))
         return dp[key];
-<<<<<<< HEAD
-    Group &cur=groups[g];
-    ll ans=0;
-=======
     ll ans=0;
     Group &cur=groups[g];
->>>>>>> 3288e81 (update)
     if(cur.intervals.empty()){
         ans=1;
         for(int i=0;i<cur.cnt;i++)
@@ -68,32 +63,6 @@ ll solve(int g,vector<int> state){
         dp[key]=ans*solve(g+1,state)%mod;
         return dp[key];
     }
-<<<<<<< HEAD
-    int max_deficit=0;
-    bool all_satisfied=true;
-    for(int id:cur.intervals){
-        if(state[id]<2){
-            all_satisfied=false;
-            max_deficit=max(max_deficit,2-state[id]);
-        }
-    }
-    int upper=min(100,2*cur.cnt);
-    if(all_satisfied){
-        upper=min(100,2*cur.cnt);
-    }
-    for(int total=0;total<=upper;total++){
-        vector<int> new_state=state;
-        for(int id:cur.intervals){
-            new_state[id]+=total;
-            if(new_state[id]>2)
-                new_state[id]=2;
-        }
-        ll c=cnt[cur.cnt][total];
-        if(c>0){
-            ans=(ans+c*solve(g+1,new_state))%mod;
-        }
-    }
-=======
     int upper=min(100,2*cur.cnt);
     for(int total=0;total<=upper;total++){
         vector<int> new_state=state;
@@ -107,7 +76,6 @@ ll solve(int g,vector<int> state){
             ans=(ans+c*solve(g+1,new_state))%mod;
         }
     }
->>>>>>> 3288e81 (update)
     dp[key]=ans;
     return ans;
 }
@@ -162,11 +130,7 @@ int main(){
         ll ans=1;
         vector<pair<int,int>> non_isolated;
         set<int> isolated_positions;
-<<<<<<< HEAD
         for(int i=0;i<m;i++){
-=======
-        for(int i=0;i<small_intervals.size();i++){
->>>>>>> 3288e81 (update)
             if(is_isolated[i]){
                 int len=small_intervals[i].second-small_intervals[i].first+1;
                 ans=ans*single[len]%mod;
@@ -182,7 +146,6 @@ int main(){
             l[i]=non_isolated[i].first;
             r[i]=non_isolated[i].second;
         }
-
         map<set<int>,int> group_map;
         for(int pos=1;pos<=n;pos++){
             if(isolated_positions.count(pos))
