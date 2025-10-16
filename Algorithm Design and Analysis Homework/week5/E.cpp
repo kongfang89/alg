@@ -114,7 +114,6 @@ int main(){
         for(int i=0;i<m;i++)
             if(!is_big[i])
                 small_intervals.push_back(input_intervals[i]);
-        
         m=small_intervals.size();
         vector<bool> is_isolated(m,true);
         for(int i=0;i<m;i++)
