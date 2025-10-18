@@ -9,22 +9,22 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 60;
-
+//题解：看注释
 int T=1;
 int n,m;
 int l[MAX_N],r[MAX_N];
 //cnt[i][j]: i个位置，提供j个因子3的方案数
 ll cnt[MAX_N][MAX_N<<1];
+//single[i]: 长度为i的独立区间的方案数
 ll single[MAX_N];
-
+//分组结构体，cnt是该组包含的位置数，intervals是该组被哪些区间覆盖
 struct Group{
     int cnt;
     vector<int> intervals;
 };
-
 vector<Group> groups;
 map<vector<int>,ll> dp;
-
+//预处理
 void init(){
     cnt[0][0]=1;
     for(int i=0;i<50;i++){
@@ -42,20 +42,24 @@ void init(){
         for(int c3=2;c3<=100;c3++)
             single[len]=(single[len]+cnt[len][c3])%mod;
 }
-
+//递归求解，g表示当前处理到第g组，state表示每个区间当前提供了多少个因子3
 ll solve(int g,vector<int> state){
+    //如果处理完所有组，检查每个区间是否至少提供了2个因子3
     if(g==groups.size()){
         for(int i=0;i<m;i++)
             if(state[i]<2)
                 return 0;
         return 1;
     }
+    //记忆化搜索
     auto key=state;
     key.insert(key.begin(),g);
     if(dp.count(key))
         return dp[key];
+    //计算答案
     ll ans=0;
     Group &cur=groups[g];
+    //当前组没有区间覆盖任何位置，则每个位置有10种方案
     if(cur.intervals.empty()){
         ans=1;
         for(int i=0;i<cur.cnt;i++)
@@ -63,6 +67,7 @@ ll solve(int g,vector<int> state){
         dp[key]=ans*solve(g+1,state)%mod;
         return dp[key];
     }
+    //枚举当前组所有位置提供的因子3的总数，在这基础上更新状态并递归处理下一组
     int upper=min(100,2*cur.cnt);
     for(int total=0;total<=upper;total++){
         vector<int> new_state=state;
@@ -93,6 +98,7 @@ int main(){
             cin>>L>>R;
             input_intervals.push_back({L,R});
         }
+        //如果一个区间包含另一个区间，则大的区间可以直接删去，相同大小的区间保留编号小的那个
         vector<bool> is_big(m,false);
         for(int i=0;i<m;i++){
             for(int j=0;j<m;j++){
@@ -114,6 +120,7 @@ int main(){
         for(int i=0;i<m;i++)
             if(!is_big[i])
                 small_intervals.push_back(input_intervals[i]);
+        //筛选出独立区间，独立区间的方案数可以用single数组计算
         m=small_intervals.size();
         vector<bool> is_isolated(m,true);
         for(int i=0;i<m;i++)
@@ -145,6 +152,7 @@ int main(){
             l[i]=non_isolated[i].first;
             r[i]=non_isolated[i].second;
         }
+        //对每个位置分组，属于同一组的位置被同样的一组区间覆盖
         map<set<int>,int> group_map;
         for(int pos=1;pos<=n;pos++){
             if(isolated_positions.count(pos))
@@ -161,6 +169,7 @@ int main(){
             g.cnt=p.second;
             groups.push_back(g);
         }
+        //计算答案
         vector<int> init_state(m,0);
         ll res=solve(0,init_state);
         ans=ans*res%mod;
