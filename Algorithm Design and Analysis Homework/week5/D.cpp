@@ -9,7 +9,12 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1e3+10;
-
+/*题解：
+dp[i][j]表示s的前i个字符与t的前j个字符的最长公共子序列长度。
+则如果s[i]==t[j]，dp[i][j]=dp[i-1][j-1]+1；
+否则dp[i][j]=max(dp[i-1][j],dp[i][j-1])，表示从s的前i-1个字符与t的前j个字符的最长公共子序列长度，
+和s的前i个字符与t的前j-1个字符的最长公共子序列长度中取较大值。
+*/
 int T=1;
 string s,t;
 int dp[MAX_N][MAX_N];
