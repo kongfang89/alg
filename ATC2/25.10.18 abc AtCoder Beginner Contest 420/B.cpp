@@ -22,10 +22,10 @@ int main(){
 		cin>>n>>m;
         for(int i=0;i<n;i++)
             cin>>s[i];
-        for(int i=0;i<n;i++){
+        for(int i=0;i<m;i++){
             int cnt0=0,cnt1=0;
-            for(int j=0;j<m;j++){
-                if(s[i][j]=='0')
+            for(int j=0;j<n;j++){
+                if(s[j][i]=='0')
                     cnt0++;
                 else
                     cnt1++;
@@ -37,9 +37,9 @@ int main(){
                 c='0';
             else
                 c='1';
-            for(int j=0;j<m;j++){
-                if(s[i][j]==c)
-                    A[i]++;
+            for(int j=0;j<n;j++){
+                if(s[j][i]==c)
+                    A[j]++;
             }
         }
         int ma=0;
@@ -48,6 +48,7 @@ int main(){
         for(int i=0;i<n;i++)
             if(A[i]==ma)
                 cout<<i+1<<' ';
+        cout<<'\n';
 	}
 	return 0;
 }
