@@ -9,7 +9,10 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1e4+10;
-
+/*题解：
+dp[i][j]=max{dp[i-1][j],dp[i-1][j-w[i]]+v[i]}表示对于考虑前i个物品容量为j的背包的最大价值。
+要么从前i-1个物品中继承下来，要么选择第i个物品（只能选择一次，故需要从dp[i-1][]继承）。
+*/
 int T=1;
 int n,b;
 int w[MAX_N],v[MAX_N];
