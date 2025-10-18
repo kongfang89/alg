@@ -9,7 +9,9 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1e3+10;
-
+/*题解：
+dp[i]表示以a[i]结尾的最长上升子序列长度
+*/
 int T=1;
 int n,b;
 int a[MAX_N],dp[MAX_N];
