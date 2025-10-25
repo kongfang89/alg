@@ -9,7 +9,14 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1e5+10;
-
+/*题解：
+二分答案求最小分块和，可能的最小分块和为a数组最大值，最大分块和为a数组和
+由于输出要求前面的块尽可能小，故从后往前分块，记录每个位置的分块号minBlocks
+再从前往后遍历，如果：
+1.剩余元素等于剩余块数，则必须分块
+2.当前块和加上下一个元素超过了求出的最小分块和，则必须分块
+3.后面剩余元素能满足剩余块数要求，为保证前面的块尽可能小，则必须分块
+*/
 int T=1;
 int n,k;
 ll a[MAX_N];
@@ -47,7 +54,6 @@ int main(){
                 l=mid+1;
         }
         ll ans=l;
-        cout<<ans<<'\n';
         vector<int> minBlocks(n+1,0);
         int cnt=1;
         ll sum=0;
