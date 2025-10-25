@@ -10,7 +10,7 @@ const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1;
 int money[10]={100, 50, 20, 10, 5, 2, 1};
-
+//题解：贪心，面值大的先考虑
 int T=1;
 int n;
 
