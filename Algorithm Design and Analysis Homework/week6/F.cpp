@@ -9,7 +9,10 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 110;
-
+/*题解：
+求最长上升子序列长度，维护一个数组s，s[i]表示长度为i的上升子序列的末尾最小值，
+遍历数组a，对于每个a[i]，用二分法在s中找到第一个大于等于a[i]的位置p，更新s[p]=a[i]，最后cnt即为所求
+*/
 int T=1;
 int n,a[MAX_N],s[MAX_N];
 
