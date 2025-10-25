@@ -31,9 +31,9 @@ int main(){
             for(int j=0;j<=i;j++){
                 for(int k=0;k<=j;k++){
                     if(L[i]<=k){
-                        dp[i+1][j][k]=(dp[i+1][j][k]+dp[i][j][k]*6LL)%mod;
-                        dp[i+1][i+1][j]=(dp[i+1][i+1][j]+dp[i][j][k]*2LL)%mod;
-                        dp[i+1][i+1][i+1]=(dp[i+1][i+1][i+1]+dp[i][j][k]*2LL)%mod;
+                        dp[i+1][j][k]=(dp[i+1][j][k]+dp[i][j][k]*6ll)%mod;
+                        dp[i+1][i+1][j]=(dp[i+1][i+1][j]+dp[i][j][k]*2ll)%mod;
+                        dp[i+1][i+1][i+1]=(dp[i+1][i+1][i+1]+dp[i][j][k]*2ll)%mod;
                     }
                 }  
             }
