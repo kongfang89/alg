@@ -44,7 +44,7 @@ int main(){
                 ans=(ans+dp[n][j][k])%mod;
             }
         }
-        cout<<ans<<endl;
+        cout<<ans<<'\n';
 	}
 	return 0;
 }
