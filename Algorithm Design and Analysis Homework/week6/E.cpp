@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 2e4+10;
-
+//题解：由于每一对数都是取min，则最小的数一定会被取，让次小的数和它配对，则次小的数不会被取，故从小到大排序，两两一组即可
 int T=1;
 int n;
 int a[MAX_N];
