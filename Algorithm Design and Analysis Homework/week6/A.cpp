@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1e4+10;
-
+//题解：贪心，小的先放
 int T=1;
 int n,m,a[MAX_N];
 
