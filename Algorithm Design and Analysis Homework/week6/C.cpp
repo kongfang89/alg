@@ -17,8 +17,6 @@ struct node{
 }a[MAX_N];
 
 int cmp(node x,node y){
-	if(x.t==y.t)
-		return x.s<y.s;
 	return x.t<y.t;
 }
 

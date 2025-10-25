@@ -9,7 +9,11 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 110;
-
+/*题解：
+设di>dj，i在j前，则s+ti-di<s+ti+tj-dj，此时最大延迟为s+ti+tj-dj；
+交换i和j，则s+tj-dj<s+ti+tj-di，此时最大延迟为s+ti+tj-di。
+显然后者更小，因此按截止时间升序排序
+*/
 int T=1;
 int n;
 struct node{
