@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1e4+10;
-
+//题解：贪心，结束时间早的先安排，因为结束时间早则剩下时间多
 int T=1;
 int n;
 struct node{
