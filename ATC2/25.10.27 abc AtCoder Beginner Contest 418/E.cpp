@@ -5,38 +5,32 @@
 #define NO cout<<"NO"<<endl
 using namespace std;
 typedef long long ll;
+typedef long double ld;
 typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 2010;
 
 int T=1;
-int n;
-int x[MAX_N],y[MAX_N];
+ll n,x[MAX_N],y[MAX_N],ans,px;
 
-struct frac{
-    int a,b;
-    frac(const int &_a,const int &_b){
-        int g=__gcd(_a,_b);
-        a=_a/g;
-        b=_b/g;
-        if(b<0){
-            a=-a;
-            b=-b;
-        }
-    }
-    bool operator <(const frac &x)const{
-        if(a==x.a)
-            return b<x.b;
-        return a<x.a;
-    }
-    bool operator ==(const frac &x)const{
-        return a==x.a && b==x.b;
-    }
-};
+unordered_map<ld,ll> K;
+unordered_map<ld,unordered_map<ld,ll>> D;
 
-map<frac,int> k;
-map<pair<int,int>,int> mid;
+ld dis(int i,int j){
+    return sqrt((x[i]-x[j])*(x[i]-x[j])+(y[i]-y[j])*(y[i]-y[j]));
+}
+
+void solve(int i,int j){
+    ld k=100000000;
+    if(y[i]!=y[j])
+        k=(ld)(x[i]-x[j])/(y[i]-y[j]);
+    ans+=K[k];
+    K[k]++;
+    ld d=dis(i,j);
+    px+=D[k][d];
+    D[k][d]++;
+}
 
 int main(){
 	ios_base::sync_with_stdio(false);cout.tie(0);cin.tie(0);
@@ -47,15 +41,10 @@ int main(){
             cin>>x[i]>>y[i];
         for(int i=1;i<=n;i++){
             for(int j=1;j<i;j++){
-                k[frac{y[i]-y[j],x[i]-x[j]}]++;
-                mid[{x[i]+x[j],y[i]+y[j]}]++;
+                solve(i,j);
             }
         }
-        ll ans=0;
-        for(auto [a,b]:k)
-            ans+=1ll*b*(b-1)/2;
-        for(auto [a,b]:mid)
-            ans-=1ll*b*(b-1)/2;
+        ans-=px/2;
         cout<<ans<<'\n';
 	}
 	return 0;
