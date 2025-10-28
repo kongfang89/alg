@@ -53,9 +53,9 @@ int main(){
         }
         ll ans=0;
         for(auto [a,b]:k)
-            ans+=1LL*b*(b-1)/2;
+            ans+=1ll*b*(b-1)/2;
         for(auto [a,b]:mid)
-            ans-=1LL*b*(b-1)/2;
+            ans-=1ll*b*(b-1)/2;
         cout<<ans<<'\n';
 	}
 	return 0;
