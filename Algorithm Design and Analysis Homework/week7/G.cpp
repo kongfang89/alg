@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1;
-
+//题解：枚举所有长度为8的二进制数，然后计算表达式的结果，如果结果为整数则答案+1
 int T=1;
 string s;
 
