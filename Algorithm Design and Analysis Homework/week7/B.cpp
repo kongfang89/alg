@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 20;
-
+//题解：dfs搜索，从第一个位置开始，枚举每一类数字，然后递归搜索下一个位置，直到所有位置都填满，输出结果
 int T=1;
 int n,a[MAX_N],vis[MAX_N],cnt[MAX_N],tot,ans[MAX_N];
 
