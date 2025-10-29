@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 20;
-
+//题解：枚举所有长度为n的二进制数，如果有r个1，则输出对应的组合
 int T=1;
 int n,r,a[MAX_N];
 
