@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 20;
-
+//题解：dfs搜索，从第一个人开始，枚举每个人做哪个任务，然后递归搜索下一个人，直到所有任务都分配完，统计总代价的最小值
 int T=1;
 int n,t[MAX_N][MAX_N],vis[MAX_N],ans;
 
