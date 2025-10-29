@@ -14,7 +14,7 @@ int T=1;
 int n,t[MAX_N][MAX_N],vis[MAX_N],ans;
 
 void dfs(int now,int val){
-	if(now==n){
+	if(now==n+1){
 		ans=min(ans,val);
 		return;
 	}
@@ -22,7 +22,7 @@ void dfs(int now,int val){
 		if(vis[i])
 			continue;
 		vis[i]=1;
-		dfs(now+1,val+t[now+1][i]);
+		dfs(now+1,val+t[now][i]);
 		vis[i]=0;
 	}
 }
@@ -36,7 +36,7 @@ int main(){
 			for(int j=1;j<=n;j++)
 				cin>>t[i][j];
 		ans=0x3f3f3f3f;
-		dfs(0,0);
+		dfs(1,0);
 		cout<<ans<<'\n';
 	}
 	return 0;
