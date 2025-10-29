@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 20;
-
+//题解：先给第一个节点染色，枚举每个节点填的颜色是否会引起冲突，然后递归搜索下一个节点，统计方案数，最后乘以颜色数就是总方案数，因为颜色是对称的
 int T=1;
 int n,m,q,ans,color[MAX_N];
 vector<int> G[MAX_N];
