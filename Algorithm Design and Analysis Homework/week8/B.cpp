@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 20;
-
+//题解：枚举排列，如果剩下的点的最小边都加上也不可能超过当前答案就剪枝，否则继续搜索
 int T=1;
 int n,m,M[MAX_N][MAX_N],vis[MAX_N],minedge[MAX_N],p[MAX_N],ans;
 
