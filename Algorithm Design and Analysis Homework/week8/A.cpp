@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 110;
-//题解：枚举子集，如果剩下的点都加上也不可能超过当前答案就剪枝，否则尝试加入当前点或者不加入当前点
+//题解：枚举子集，如果剩下的点都加上也不可能优于当前答案就剪枝，否则尝试加入当前点或者不加入当前点
 int T=1;
 int n,m,M[MAX_N][MAX_N],vis[MAX_N],ans;
 

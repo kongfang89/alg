@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 20;
-
+//题解：枚举排列，如果剩下的圆都选最小的半径都加上也不可能优于当前答案就剪枝，否则继续搜索，getx表示计算当前要放置的圆的横坐标
 int T=1;
 int n,vis[MAX_N],p[MAX_N];
 double a[MAX_N],x[MAX_N],ans;
