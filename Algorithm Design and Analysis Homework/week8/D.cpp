@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 20;
-
+//题解：dfs搜索，每次找到一个0，选择它周围五格中能覆盖最多0的位置放置基站，如果要用的基站比ans大或者剩下的0取最优情况也不可能优于当前答案就剪枝
 int T=1;
 int n,m,M[MAX_N][MAX_N],ans;
 int dx[5]={0,1,0,-1,0};
