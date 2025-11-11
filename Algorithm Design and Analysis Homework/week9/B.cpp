@@ -10,7 +10,7 @@ const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1010;
 const double eps=1e-10;
-
+//题解：使用单纯形算法求解
 int T=1;
 
 struct Simplex{

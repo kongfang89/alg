@@ -10,7 +10,7 @@ const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1010;
 const double eps=1e-10;
-//题解：先把求最小转换为求最大，再使用单纯形算法求解，求完后结果取相反数即为所求最小值。
+//题解：先把求最小转换为求最大，再使用单纯形算法求解，求完后结果取相反数即为所求最小值
 int T=1;
 
 struct Simplex{
