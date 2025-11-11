@@ -10,7 +10,16 @@ const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1;
 const double eps=1e-10;
+/*题解：
+原线性规划：
+求min sum(cj*xj) j=1~m
+约束 a[i][1]+...+a[i][m]>=ai i=1~n, if sj<=i<=tj a[i][j]=1 else a[i][j]=0
+对偶线性规划：
+求max sum(ai*yi) i=1~n
+约束 a[j][1]+...+a[j][n]<=cj j=1~m, if sj<=i<=tj a[j][i]=1 else a[j][i]=0
 
+无需交换
+*/
 int T=1;
 
 struct Simplex{
