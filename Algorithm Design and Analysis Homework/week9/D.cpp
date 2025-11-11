@@ -18,7 +18,7 @@ const double eps=1e-10;
 求max sum(ai*yi) i=1~n
 约束 a[j][1]+...+a[j][n]<=cj j=1~m, if sj<=i<=tj a[j][i]=1 else a[j][i]=0
 
-无需交换
+无需交换输入的n,m
 */
 int T=1;
 
