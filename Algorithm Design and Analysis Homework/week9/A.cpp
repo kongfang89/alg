@@ -74,7 +74,7 @@ Simplex spx;
 
 int main(){
 	ios_base::sync_with_stdio(false);cout.tie(0);cin.tie(0);
-//	cin>>T;
+	// cin>>T;
 	while(T--){
 		n=3,m=3;
 		spx.init(n,m);

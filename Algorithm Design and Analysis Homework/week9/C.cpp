@@ -10,7 +10,16 @@ const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1;
 const double eps=1e-10;
+/*题解：
+原线性规划：
+求min sum(Ci*xi) i=1~n
+约束 xLj+...+xRj>=Dj j=1~m
+对偶线性规划：
+求max sum(Dj*yj) j=1~m
+约束 a[1][i]+...+a[m][i]<=Ci i=1~n
 
+把输入的n,m交换即可
+*/
 int T=1;
 
 struct Simplex{
@@ -18,7 +27,7 @@ struct Simplex{
 	vector<vector<double>> a;
 	vector<double> b,c;
 	int n,m;
-	void init(int _m,int _n){
+	void init(int _n,int _m){
 		n=_n,m=_m,z=0;
 		a.resize(m+10,vector<double>(n+10,0));
 		b.resize(m+10,0);
@@ -77,16 +86,16 @@ Simplex spx;
 
 int main(){
 	ios_base::sync_with_stdio(false);cout.tie(0);cin.tie(0);
-//	cin>>T;
+	// cin>>T;
 	while(T--){
-		cin>>n>>m;
+		cin>>m>>n;
 		spx.init(n,m);
-		for(int i=0;i<n;i++)
-			cin>>spx.b[i];
 		for(int i=0;i<m;i++)
-			cin>>l[i]>>r[i]>>spx.c[i];
+			cin>>spx.b[i];
 		for(int i=0;i<n;i++)
-			for(int j=0;j<m;j++)
+			cin>>l[i]>>r[i]>>spx.c[i];
+		for(int i=0;i<m;i++)
+			for(int j=0;j<n;j++)
 				spx.a[i][j]=i>=l[j]-1&&i<=r[j]-1;
 		cout<<(int)(spx.solve()+eps)<<'\n';
 	}
