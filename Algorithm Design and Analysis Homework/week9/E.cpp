@@ -10,7 +10,11 @@ const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1;
 const double eps=1e-10;
-
+/*题解：
+求max sum(numi*xi) i=1~3*n
+s.t. x_i+...+x_i+n-1<=k i=1~2*n+1
+     x_i<=1 i=1~3*n
+*/
 int T=1;
 
 struct Simplex{
