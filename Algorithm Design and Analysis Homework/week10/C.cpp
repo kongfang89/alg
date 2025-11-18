@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 30010;
-
+//题解：求二分图最大匹配问题可以转化为求最大流问题，构建超级源点连接左边所有节点和超级汇点连接右边所有节点，使用Dinic算法求最大流
 int T=1;
 int head[MAX_N],to[MAX_N],nxt[MAX_N],w[MAX_N],cnt;
 int layer[MAX_N],work[MAX_N],n,m,s,t;
