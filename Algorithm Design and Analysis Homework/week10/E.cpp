@@ -8,7 +8,7 @@ typedef long long ll;
 typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
-const int MAX_N = 4050;
+const int MAX_N = 5010;
 
 int T=1;
 int head[MAX_N],to[MAX_N],nxt[MAX_N],w[MAX_N],cnt;
