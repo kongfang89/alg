@@ -9,7 +9,15 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 5010;
-
+/*题解：
+拆点建图，每个点拆成两个点，i拆为inpoint(i)=i*2和outpoint(i)=i*2+1，则原来的nn个点变为nn*2个点，范围为2~2*nn+1，设s=1，t=2*nn+2
+对于原本的每条边u-v，添加两条边outpoint(u)->inpoint(v)和outpoint(v)->inpoint(u)，容量为INF
+对于原本的每个点i，添加一条边inpoint(i)->outpoint(i)，容量为1
+对于原本的源点1，添加两条边s->inpoint(1)和s->outpoint(1)，容量为INF
+对于原本的汇点2，添加两条边inpoint(2)->t和outpoint(2)->t，容量为INF
+设置成INF的边是为了保证它们不会成为最小割的一部分，因为题目要求坏掉的是设备，不是设备之间的连接
+求最小割问题可以转化为求最大流问题，使用Dinic算法求最大流
+*/
 int T=1;
 int head[MAX_N],to[MAX_N],nxt[MAX_N],w[MAX_N],cnt;
 int layer[MAX_N],work[MAX_N],n,m,s,t;
@@ -86,10 +94,10 @@ int main(){
 	while(cin>>nn>>mm){
 		memset(head,-1,sizeof(head));
 		cnt=0;
-		n=(nn+1)*2+1;
+		n=2*nn+2;
 		m=mm;
-		s=0;
-		t=(n+1)*2;
+		s=1;
+		t=n;
 		for(int i=1;i<=m;i++){
 			int u,v;
 			cin>>u>>v;

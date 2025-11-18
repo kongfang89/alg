@@ -8,8 +8,8 @@ typedef long long ll;
 typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
-const int MAX_N = 1010;
-//题解：求最小割问题可以转化为求最大流问题，使用Dinic算法求最大流，注意无向图的反向边容量也是w，而不是0
+const int MAX_N = 2010;
+//题解：求最小割问题可以转化为求最大流问题，使用Dinic算法求最大流，注意无向图需要添加两条边，两个方向都是w
 int T=1;
 int head[MAX_N],to[MAX_N],nxt[MAX_N],w[MAX_N],cnt;
 int layer[MAX_N],work[MAX_N],n,m,s,t;
@@ -23,7 +23,7 @@ void add(int u,int v,int _w){
 
 void add_edge(int u,int v,int w){
 	add(u,v,w);
-	add(v,u,w);
+	add(v,u,0);
 }
 
 bool DiBFS(){
@@ -83,6 +83,7 @@ int main(){
 			int u,v,w;
 			cin>>u>>v>>w;
 			add_edge(u,v,w);
+			add_edge(v,u,w);
 		}
 		cout<<Dinic()<<'\n';
 	}
