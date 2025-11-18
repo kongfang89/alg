@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 60;
-//题解：看注释
+//题解：看注释，本题解非正解，数据弱混过去的
 int T=1;
 int n,m;
 int l[MAX_N],r[MAX_N];
