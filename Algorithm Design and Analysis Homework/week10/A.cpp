@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 10010;
-
+//题解：Dinic算法求最大流
 int T=1;
 int head[MAX_N],to[MAX_N],nxt[MAX_N],w[MAX_N],cnt;
 int layer[MAX_N],work[MAX_N],n,m,s,t;
