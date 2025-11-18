@@ -76,6 +76,7 @@ int main(){
 	// cin>>T;
 	while(cin>>n>>m){
 		memset(head,-1,sizeof(head));
+		cnt=0;
 		s=1;
 		t=2;
 		for(int i=1;i<=m;i++){

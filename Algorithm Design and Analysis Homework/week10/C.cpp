@@ -77,6 +77,7 @@ int main(){
 	int nn,mm,ee;
 	while(cin>>nn>>mm>>ee){
 		memset(head,-1,sizeof(head));
+		cnt=0;
 		n=nn+mm+2;
 		m=ee;
 		s=1;
