@@ -8,7 +8,7 @@ typedef long long ll;
 typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
-const int MAX_N = 1010;
+const int MAX_N = 1;
 const double eps=1e-9;
 //题解：枚举所有直线的交点，判断交点是否合法，合法则计算x+y的最小值
 int T=1;
