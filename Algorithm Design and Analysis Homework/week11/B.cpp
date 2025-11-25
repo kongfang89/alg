@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1;
-
+//题解：输入0，则保留l~l+[half]-1，输入1，则保留l+[half]~l+2*[half]-1，输入2，则直接输出最后一个小球编号
 int T=1;
 int n,m;
 
