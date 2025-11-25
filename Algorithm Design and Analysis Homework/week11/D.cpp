@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1010;
-
+//题解：贪心，每次找最近的设备
 int T=1;
 int n,a[MAX_N];
 
@@ -17,16 +17,16 @@ int main(){
 	ios_base::sync_with_stdio(false);cout.tie(0);cin.tie(0);
 	// cin>>T;
 	while(cin>>n){
-		for(int i=0;i<n;i++)
+		for(int i=1;i<=n;i++)
 			cin>>a[i];
-		sort(a,a+n);
+		sort(a+1,a+n+1);
 		ll now=0;
 		ll ans=0; 
-		for(int i=0;i<n;i++){
+		for(int i=1;i<=n;i++){
 			ans+=now+a[i];
 			now+=2*a[i];
 		}
-		cout<<ans<<endl;
+		cout<<ans<<'\n';
 	}
 	return 0;
 }
