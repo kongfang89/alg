@@ -9,23 +9,19 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1;
-
+//题解：枚举八个位置的排列，计算每种排列下的价值，取最大值
 int T=1;
 ll a[10];
 
-// 计算当前排列的权值和
 ll cal(){
 	ll res=0;
 	for(int i=0;i<8;i++){
-		if(i==0){
+		if(i==1)
 			res+=a[0]*a[1];
-		}
-		else if(i==7){
+		else if(i==7)
 			res+=a[7]*a[6];
-		}
-		else{
+		else
 			res+=a[i]*a[i-1]*a[i+1];
-		}
 	}
 	return res;
 }
