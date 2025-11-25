@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 100003;
 //const int mod = 998244353;
 const int MAX_N = 1e6+10;
-
+//题解：到达第i级台阶的方法数为到达第i-k~i-1级台阶的方法数之和
 int T=1;
 int n,k,ans[MAX_N];
 
