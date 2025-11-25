@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1010;
-
+//题解：选出最贵的物品，至少留5元最后买它，用剩下的钱买其他物品使得总价值最大，可以看作01背包
 int T=1;
 int n,m,a[MAX_N];
 int dp[MAX_N];
@@ -23,7 +23,7 @@ int main(){
 		memset(dp,0,sizeof(dp));
         int ma=-0x3f3f3f3f;
         int id=-1;
-        for(int i=0;i<n;i++){
+        for(int i=1;i<=n;i++){
             cin>>a[i];
             if(a[i]>ma){
                 id=i;
@@ -36,7 +36,7 @@ int main(){
             continue;
         }
         m-=5;
-        for(int i=0;i<n;i++){
+        for(int i=1;i<=n;i++){
             if(i==id)
                 continue;
             for(int j=m;j>=a[i];j--)
