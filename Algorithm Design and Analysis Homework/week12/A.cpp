@@ -26,7 +26,7 @@ double calc(double t1,double t2,double s1,double s2,double w){
         res+=calc_integral(start1,end1,-w-s1);
     double start2=max(t1,s2+w);
     double end2=t2;
-    if (start2<end2)
+    if(start2<end2)
         res+=(end2-start2)*(s2-s1);
     return res;
 }
