@@ -9,7 +9,17 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1;
-
+/*题解：
+设第一人到达时间为x，第二人到达时间为y，则两人相遇的条件为|x-y|<=w
+其中x在[t1,t2]均匀分布，y在[s1,s2]均匀分布，则概率为满足条件的面积与总面积之比
+总面积area=(t2-t1)*(s2-s1)
+满足条件的面积被两条直线y=x-w和y=x+w分割成三部分：
+1. y<=x-w的部分面积area1
+2. x-w<y<x+w的部分面积area_meet
+3. y>=x+w的部分面积area2
+则area_meet=area-area1-area2
+area1和area2可以通过积分计算得到
+*/
 int T=1;
 
 double calc_integral(double a,double b,double c){
