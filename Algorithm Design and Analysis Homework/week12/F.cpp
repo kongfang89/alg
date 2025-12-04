@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1;
-
+//题解：找到第一个不匹配的位置，尝试删除该位置字符或其对称位置字符后判断剩余字符串是否为回文
 int T=1;
 
 int main(){
