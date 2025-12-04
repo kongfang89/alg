@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 100003;
 //const int mod = 998244353;
 const int MAX_N = 30;
-
+//题解：(i,j)的路径数=(i-1,j)的路径数+(i,j-1)的路径数
 int T=1;
 int n,m;
 ll a[MAX_N][MAX_N];
