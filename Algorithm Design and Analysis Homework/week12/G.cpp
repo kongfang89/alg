@@ -34,7 +34,7 @@ int main(){
 			}
 			ans=max(ans,r-l);
 		}
-		cout<<ans<<endl;
+		cout<<ans<<'\n';
 	}
 	return 0;
 }
