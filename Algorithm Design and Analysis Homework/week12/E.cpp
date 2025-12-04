@@ -77,7 +77,7 @@ int main(){
 		}
         else{
 			for(auto x:ans)
-                cout<<x<<" ";
+                cout<<x<<' ';
             cout<<'\n';
 		}
 	}
