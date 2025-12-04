@@ -9,7 +9,9 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1e5+10;
-
+/*题解：使用分治优化动态规划
+dp[t][i] = min over j < i ( dp[t-1][j] + cost(j+1, i) )
+*/
 int T=1;
 int n,k;
 int a[MAX_N];
