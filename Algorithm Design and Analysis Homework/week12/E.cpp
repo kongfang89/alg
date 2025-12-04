@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1;
-
+//题解：枚举前两个数的长度，然后验证后续数字能否凑成斐波那契数列
 int T=1;
 string s;
 int n;
