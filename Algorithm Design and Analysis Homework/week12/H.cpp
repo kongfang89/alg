@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1300010;
-
+//题解：用map找众数及其出现次数
 int T=1;
 int n,a[MAX_N];
 
