@@ -11,6 +11,7 @@ const int mod = 1e9+7;
 const int MAX_N = 1e5+10;
 /*题解：使用分治优化动态规划
 dp[t][i] = min over j < i ( dp[t-1][j] + cost(j+1, i) )
+原题链接：https://www.luogu.com.cn/problem/CF868F
 */
 int T=1;
 int n,k;
@@ -47,13 +48,13 @@ void solve(int t,int L,int R,int l,int r){
     int mid=L+R>>1;
     ll mi=1e18;
     int id=-1;
-    int start=min(mid-1,r);
-    for(int j=l;j<=start;j++){
-        change(j+1,mid);
-        ll val=dp[t-1][j]+cost;
+    int end=min(mid-1,r);
+    for(int i=l;i<=end;i++){
+        change(i+1,mid);
+        ll val=dp[t-1][i]+cost;
         if(val<mi){
             mi=val;
-            id=j;
+            id=i;
         }
     }
     dp[t][mid]=mi;
