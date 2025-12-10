@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 400;
-
+//题解：动态规划，dp[i]表示前i个活动日的最小花费
 int T=1;
 int n,days[MAX_N];
 int cost[3];
@@ -35,7 +35,7 @@ int main(){
                 j--;
 			dp[i]=min(dp[i],dp[j]+cost[2]);
 		}
-		cout<<dp[n]<<endl;
+		cout<<dp[n]<<'\n';
 	}
 	return 0;
 }
