@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1010;
-
+//题解：动态规划，dp[i][j]表示以(i,j)为右下角的最大正方形边长，如果a[i][j]=0则dp[i][j]=0，否则dp[i][j]=min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1])+1
 int T=1;
 int n,m;
 int a[MAX_N][MAX_N];
