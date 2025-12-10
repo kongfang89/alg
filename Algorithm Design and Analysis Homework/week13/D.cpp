@@ -10,7 +10,7 @@ const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 110;
 const double eps=1e-10;
-
+//题解：单纯形算法求解线性规划问题，区别是解的是满足最优解的变量值
 int T=1;
 
 struct Simplex{
