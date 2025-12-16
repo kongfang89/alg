@@ -9,7 +9,7 @@ typedef unsigned long long ull;
 // const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 510;
-
+//题解：二维树状数组维护区间加法和区间查询
 int T=1;
 int n,m;
 ll seed1,seed2,mod,base;
