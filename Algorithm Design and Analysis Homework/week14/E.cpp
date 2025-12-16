@@ -3,66 +3,41 @@
 #define LINF LLONG_MAX 
 #define YES cout<<"YES"<<endl
 #define NO cout<<"NO"<<endl
-#define ls (x<<1)
-#define rs (x<<1|1)
-#define mid (l+r>>1)
 using namespace std;
 typedef long long ll;
 typedef unsigned long long ull;
-const int mod = 1e9+7;
+// const int mod = 1e9+7;
 //const int mod = 998244353;
-const int MAX_N = 1e5+10;
+const int MAX_N = 510;
 
 int T=1;
-ll n,m,a[MAX_N];
-ll tr[MAX_N<<2],addi[MAX_N<<2];
+int n,m;
+ll seed1,seed2,mod,base;
 
-inline void pushup(ll x){
-	tr[x]=(tr[ls]+tr[rs]);
+struct BIT{
+    ll s[MAX_N][MAX_N];
+    void update(int x,int y,ll val){
+        if(!x||!y)
+            return;
+        for(int i=x;i<=n;i+=i&-i)
+            for(int j=y;j<=n;j+=j&-j)
+                s[i][j]+=val;
+    }
+    ll query(int x,int y){
+        ll ret=0;
+        for(int i=x;i;i-=i&-i)
+            for(int j=y;j;j-=j&-j)
+                ret+=s[i][j];
+        return ret;
+    }
+}A,B,C,D;
+
+void add(int x,int y,ll val){
+    A.update(x,y,val*x*y),B.update(x,y,val*x),C.update(x,y,val*y),D.update(x,y,val);
 }
 
-inline void pushdown(ll x,ll l,ll r){
-	if(addi[x]==0)
-		return;
-	tr[ls]=tr[ls]+addi[x]*(mid-l+1);
-	tr[rs]=tr[rs]+addi[x]*(r-mid);
-	addi[ls]=addi[ls]+addi[x];
-	addi[rs]=addi[rs]+addi[x];
-	addi[x]=0;
-}
-
-void build(ll x,ll l,ll r){
-	addi[x]=0;
-	if(l==r){
-		tr[x]=a[l];
-		return;
-	}
-	build(ls,l,mid);
-	build(rs,mid+1,r);
-	pushup(x);
-}
-
-inline void add(ll x,ll nl,ll nr,ll l,ll r,ll k){
-	if(nr<l||nl>r)
-		return;
-	if(nl<=l&&nr>=r){
-		addi[x]=(addi[x]+k);
-		tr[x]=(tr[x]+k*(r-l+1));
-		return;
-	}
-	pushdown(x,l,r);
-	add(ls,nl,nr,l,mid,k);
-	add(rs,nl,nr,mid+1,r,k);
-	pushup(x);
-}
-
-ll query(ll x,ll nl,ll nr,ll l,ll r){
-	if(nr<l||nl>r)
-		return 0;
-	if(nl<=l&&nr>=r)
-		return tr[x];
-	pushdown(x,l,r);
-	return (query(ls,nl,nr,l,mid)+query(rs,nl,nr,mid+1,r));
+ll query(int x,int y){
+    return A.query(x,y)+y*(B.query(x,n)-B.query(x,y))+x*(C.query(n,y)-C.query(x,y))+x*y*(D.query(n,n)-D.query(x,n)-D.query(n,y)+D.query(x,y));
 }
 
 int main(){
@@ -70,21 +45,29 @@ int main(){
 	// cin>>T;
 	while(T--){
 		cin>>n>>m;
-		for(int i=1;i<=n;i++)
-			cin>>a[i];
-		build(1,1,n);
-		while(m--){
-			ll op,l,r,k;
-			cin>>op;
-			if(op==1){
-				cin>>l>>r>>k;
-				add(1,l+1,r+1,1,n,k);
-			}
-			else{
-				cin>>l>>r;
-				cout<<query(1,l+1,r+1,1,n)<<'\n';
-			}
-		}
+        cin>>seed1>>seed2>>mod>>base;
+        for(int i=0;i<n;i++)
+            for(int j=0;j<n;j++){
+                int x1,y1,x2,y2;
+                ll v;
+                x1=i,y1=j,x2=i,y2=j;
+                v=(i*seed1+j*seed2)%mod+base;
+                add(x1,y1,v),add(x1,y2+1,-v),add(x2+1,y1,-v),add(x2+1,y2+1,v);
+            }
+        while(m--){
+            int op;
+            cin>>op;
+            if(op==1){
+                int x1,y1,x2,y2,v;
+                cin>>x1>>y1>>x2>>y2>>v;
+                add(x1,y1,v),add(x1,y2+1,-v),add(x2+1,y1,-v),add(x2+1,y2+1,v);
+            }
+            else{
+                int x1,y1,x2,y2;
+                cin>>x1>>y1>>x2>>y2;
+                cout<<query(x1,y1)-query(x1,y2+1)-query(x2+1,y1)+query(x2+1,y2+1)<<'\n';
+            }
+        }
 	}
 	return 0;
 }
