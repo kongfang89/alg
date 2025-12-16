@@ -12,7 +12,7 @@ typedef unsigned long long ull;
 const int mod = 1e9+7;
 //const int mod = 998244353;
 const int MAX_N = 1e5+10;
-
+//题解：线段树维护区间最大值
 int T=1;
 ll n,m,a[MAX_N];
 ll tr[MAX_N<<2];
