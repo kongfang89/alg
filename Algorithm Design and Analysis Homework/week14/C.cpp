@@ -81,8 +81,8 @@ int main(){
 				add(1,l+1,r+1,1,n,k);
 			}
 			else{
-				cin>>l>>r;
-				cout<<query(1,l+1,r+1,1,n)<<'\n';
+				cin>>l;
+				cout<<query(1,l+1,l+1,1,n)<<'\n';
 			}
 		}
 	}
