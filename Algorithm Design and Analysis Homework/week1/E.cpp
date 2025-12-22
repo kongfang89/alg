@@ -27,7 +27,7 @@ int main(){
             }
             else if(cnt<5){
                 if(a[i]>a[id[cnt-1]])
-                id[cnt++]=i;
+                    id[cnt++]=i;
             }
             else if(cnt==5){
                 if(a[i]>a[id[4]]){
