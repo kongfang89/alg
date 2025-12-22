@@ -30,9 +30,6 @@ int main(){
             else{
                 int p=lower_bound(s+1,s+cnt+1,a[i])-s;
                 s[p]=a[i];
-                for(int j=1;j<=cnt;j++)
-                    cout<<s[j]<<" ";
-                cout<<endl;
             }
         }
         cout<<cnt<<'\n';
