@@ -13,20 +13,10 @@ const int MAX_N = 1;
 int T=1;
 ll a,n;
 
-int check(ll x,ll base){
-	vector<ll> v;
-	while(x){
-		v.push_back(x%base);
-		x/=base;
-	}
-	int flag=1;
-	for(int i=0;i<v.size();i++){
-		if(v[i]!=v[v.size()-1-i]){
-			flag=0;
-			break;
-		}
-	}
-	return flag;
+int check(string s){
+	string t=s;
+    reverse(t.begin(),t.end());
+    return s==t;
 }
 
 int main(){
@@ -35,11 +25,43 @@ int main(){
 	while(T--){
 		cin>>a>>n;
 		ll ans=0;
-		for(ll i=1;i<=n;i++){{
-			if(check(i,10ll)&&check(i,a))
-				ans+=i;
-		}
-		cout<<ans<<'\n';
+        vector<ll> v;
+		for(int i=1;i<=999999;i++){
+            string s=to_string(i);
+            string t=s;
+            reverse(t.begin(),t.end());
+            s+=t;
+            ll sum=0;
+            for(int j=s.size()-1;j>=0;j--)
+                sum+=pow(10,s.size()-1-j)*(s[j]-'0');
+            v.push_back(sum);
+        }
+        for(int i=1;i<=999999;i++){
+            string t=to_string(i);
+            string s="";
+            for(int j=0;j<t.size();j++)
+                s+=t[j];
+            for(int j=t.size()-2;j>=0;j--)
+                s+=t[j];
+            ll sum=0;
+            for(int j=s.size()-1;j>=0;j--)
+                sum+=pow(10,s.size()-1-j)*(s[j]-'0');
+            v.push_back(sum);
+        }
+        sort(v.begin(),v.end());
+        for(auto i:v){
+            if(i>n)
+                break;
+            ll j=i;
+            string s="";
+            while(j){
+                s+=char(j%a+'0');
+                j/=a;
+            }
+            if(check(s))
+                ans+=i;
+        }
+        cout<<ans<<'\n';
 	}
 	return 0;
 }
